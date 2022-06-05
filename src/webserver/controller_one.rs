@@ -1,11 +1,14 @@
+use rocket_dyn_templates::{context, Template};
 use crate::diesel::prelude::*;
 use crate::database::database_utils::establish_connection;
 use crate::database::models::posts::Post;
 use crate::database::models::schema::posts::dsl::*;
 
 #[get("/")]
-pub fn index() -> &'static str {
-    "Hello World"
+pub fn index() -> Template {
+    Template::render("index", context! {
+        title: "Title page",
+    })
 }
 
 #[get("/hello/<name>")]

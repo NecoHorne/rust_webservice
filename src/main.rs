@@ -3,6 +3,8 @@
 extern crate diesel;
 extern crate dotenv;
 extern crate serde;
+extern crate rocket_dyn_templates;
+extern crate tera;
 
 mod database;
 mod webserver;

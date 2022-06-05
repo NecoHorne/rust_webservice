@@ -1,5 +1,6 @@
 [global]
 port = 8080
+temp_dir = "/templates"
 
 [development]
 address = "localhost"
