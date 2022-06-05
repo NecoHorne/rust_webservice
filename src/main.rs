@@ -5,14 +5,20 @@ extern crate dotenv;
 extern crate serde;
 
 mod database;
-mod controllers;
+mod grpc;
 
-use controllers::controller_one::*;
-use controllers::controller_two::*;
+mod webserver;
+use webserver::server::rocket_main;
 
-#[rocket::main]
-async fn main(){
-    let _ = rocket::build().mount("/",
-                                  routes![index, test, hello, index_two, test_two, hello_two]
-    ).launch().await.expect("TODO: panic message");
+use std::thread;
+use grpc::grpc_server::grpc_server;
+
+fn main(){
+
+    thread::spawn(|| {
+        grpc_server().expect("");
+    });
+
+    rocket_main();
+
 }
