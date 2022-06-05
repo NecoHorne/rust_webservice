@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package auth;
+
+import "address.proto";
+import "google/protobuf/timestamp.proto";
+
+/*
+ * This proto file will be used by the client to get only some details about users and sellers without exposing
+ * unnecessary private data.
+ */
+
+message UserDetails{
+  string uid = 1;
+  string display_name = 2;
+  double userRating = 3;
+}
+
+message SellerDetails{
+  string uid = 1;
+  string display_name = 2;
+  double userRating = 3;
+  string company_name = 4;
+  string description = 5;
+  string profile_picture = 6;
+  string shop_url = 7;
+}
+
+message GetUserDetailsRequest{
+  string token = 1;
+  string uid = 2;
+}
+message GetUserDetailsResponse{
+  bool success = 1;
+  string message = 2;
+  UserDetails user_details = 3;
+}
+
+message GetSellerDetailsRequest{
+  string token = 1;
+  string uid = 2;
+}
+message GetSellerDetailsResponse{
+  bool success = 1;
+  string message = 2;
+  SellerDetails seller_details = 3;
+}
+
+message RegisterNewUserRequest {
+  string email = 1;
+  string password = 2;
+  string fcm = 3;
+  string username = 4;
+  google.protobuf.Timestamp birthday = 5;
+}
+message RegisterNewUserResponse {
+  bool success = 1;
+  string response_message = 2;
+}
+
+message UpdateUserFCMRequest{
+  string token = 1;
+  string fcm = 2;
+}
+message UpdateUserFCMResponse{
+  bool success = 1;
+  string response_message = 2;
+}
+
+message UpdateUserDetailsRequest{
+  string token = 1;
+  //set string values to "" (empty string if value is not being updated)
+  string display_name = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string telephone = 5;
+  string password = 6;
+  //set seconds and nanos to 0 if birthday is not being updated
+  google.protobuf.Timestamp birthday = 7;
+  //set street, city and province to "" if address is not being updated
+  AddressPB address = 8;
+}
+message UpdateUserDetailsResponse{
+  bool success = 1;
+  string response_message = 2;
+}
+
+service UserDetailsService{
+  rpc GetUserDetails(GetUserDetailsRequest) returns (GetUserDetailsResponse) {};
+  rpc GetSellerDetails(GetSellerDetailsRequest) returns (GetSellerDetailsResponse) {};
+  rpc RegisterNewUser(RegisterNewUserRequest) returns (RegisterNewUserResponse) {};
+  rpc UpdateUserFCM(UpdateUserFCMRequest) returns (UpdateUserFCMResponse) {};
+  rpc UpdateUserDetails(UpdateUserDetailsRequest) returns (UpdateUserDetailsResponse) {};
+}

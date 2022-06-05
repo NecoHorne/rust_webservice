@@ -5,9 +5,21 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "grpc-server"
+path = "src/grpc/grpc_server.rs"
+
 [dependencies]
-diesel = { version = "1.4.8", features = ["mysql"] }
-dotenv = "0.15.0"
+diesel = { version = "1.4.8", features = ["mysql"] } #orm framework
+dotenv = "0.15.0" #env library
 dotenv_codegen = "0.15.0"
-reqwest = { version = "0.11", features = ["blocking", "json"] }
-rocket = "0.5.0-rc.2"
+reqwest = { version = "0.11", features = ["blocking", "json"] } #http
+serde = {version = "1.0.137", features = ["derive"]} #serialization
+tonic = "0.7.2" #gRPC
+prost = "0.10.4" #protobuff
+prost-types = "0.10.1" #well known types / google
+tokio = {version = "1.18.2", features = ["full"]} #async runtime
+rocket = "0.5.0-rc.2" #web framework
+
+[build-dependencies]
+tonic-build = "0.7.2" #build protobuffs during compilation

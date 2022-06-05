@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package auth;
+
+message AddressPB{
+
+  string street_address = 1;
+  string city = 2;
+  string state_province = 3;
+  string country = 4;
+  string company = 5;
+  string postal_code = 6;
+  double longitude = 7;
+  double latitude = 8;
+}

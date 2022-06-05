@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package auth;
+
+message AuthenticateUserRequest{
+  string user_name = 1;
+  string password = 2;
+}
+message AuthenticateUserResponse{
+  bool success = 1;
+  string token = 2;
+  string refresh_token = 3;
+  string response_message = 4;
+  string email = 5;
+  bool email_verified = 6;
+  string uid = 7;
+  string photo_url = 8;
+  string meta_data = 9;
+  string display_name = 10;
+}
+
+message AuthenticateServiceRequest{
+  string user_name = 1;
+  string password = 2;
+}
+message AuthenticateServiceResponse{
+  bool success = 1;
+  string token = 2;
+  string response_message = 4;
+}
+
+message CheckTokenRequest{
+  string token = 1;
+}
+
+message TokenLoginRequest{
+  string token = 1;
+}
+
+message CheckTokenResponse{
+  bool authenticated = 1;
+  string response_message = 4;
+}
+
+message InvalidateRefreshTokenRequest{
+  string refresh_token = 1;
+}
+message InvalidateRefreshTokenResponse{
+  bool success = 1;
+}
+
+message RefreshTokenRequest{
+  string refresh_token = 1;
+}
+message RefreshTokenResponse{
+  bool success = 1;
+  string token = 2;
+  string response_message = 3;
+}
+
+message GetUserByTokenRequest{
+  string jwt = 1;
+  string refreshToken = 2;
+  string fcm = 11;
+}
+message GetsUserByTokenResponse{
+  bool success = 1;
+  string token = 2;
+  string refresh_token = 3;
+  string response_message = 4;
+  string email = 5;
+  bool email_verified = 6;
+  string uid = 7;
+  string photo_url = 8;
+  string meta_data = 9;
+  string display_name = 10;
+  string fcm = 11;
+}
+
+message ResetPasswordRequest{
+  string email = 1;
+}
+message ResetPasswordResponse{
+  string response_message = 1;
+}
+
+message VerifyUserEmailRequest{
+  string email_address = 1;
+}
+message VerifyUserEmailResponse{
+  bool success = 1;
+  string message = 2;
+}
+
+message ResendVerifyEmailRequest{
+  string email_address = 1;
+}
+message ResendVerifyEmailResponse{
+  bool success = 1;
+  string message = 2;
+}
+
+message HashPasswordRequest{
+  string token = 1;
+  string password = 2;
+}
+message HashPasswordResponse{
+  string hash = 1;
+  string message = 2;
+  bool success = 3;
+}
+
+service AuthenticationService{
+  rpc AuthenticateUser(AuthenticateUserRequest) returns (AuthenticateUserResponse) {};
+  rpc AuthenticateService(AuthenticateServiceRequest) returns (AuthenticateServiceResponse) {};
+  rpc CheckToken(CheckTokenRequest) returns (CheckTokenResponse) {};
+  rpc TokenLogin(TokenLoginRequest) returns (CheckTokenResponse) {};
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse) {};
+  rpc GetUserByToken(GetUserByTokenRequest) returns (GetsUserByTokenResponse) {};
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {} ;
+  rpc InvalidateRefreshToken(InvalidateRefreshTokenRequest) returns (InvalidateRefreshTokenResponse){};
+  rpc VerifyUserEmail(VerifyUserEmailRequest) returns (VerifyUserEmailResponse) {};
+  rpc ResendVerifyEmail(ResendVerifyEmailRequest) returns (ResendVerifyEmailResponse) {};
+  rpc HashPassword(HashPasswordRequest) returns (HashPasswordResponse) {};
+}
