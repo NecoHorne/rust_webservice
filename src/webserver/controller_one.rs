@@ -1,7 +1,7 @@
 use crate::diesel::prelude::*;
-use crate::database::schema::posts::dsl::*;
-use crate::database::models::Post;
 use crate::database::database_utils::establish_connection;
+use crate::database::models::posts::Post;
+use crate::database::models::schema::posts::dsl::*;
 
 #[get("/")]
 pub fn index() -> &'static str {

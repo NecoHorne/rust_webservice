@@ -2,8 +2,8 @@ use dotenv::dotenv;
 use std::env;
 use diesel::prelude::*;
 
-use crate::database::models::{NewPost, Post};
-use crate::database::schema::posts;
+use crate::database::models::posts::{NewPost, Post};
+use crate::database::models::schema::posts;
 
 pub fn establish_connection() -> MysqlConnection {
 

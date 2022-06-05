@@ -7,3 +7,9 @@ table! {
         published -> Bool,
     }
 }
+
+table! {
+    users (id) {
+        id -> Integer,
+    }
+}

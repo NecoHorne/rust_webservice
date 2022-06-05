@@ -5,20 +5,24 @@ extern crate dotenv;
 extern crate serde;
 
 mod database;
+mod webserver;
 mod grpc;
 
-mod webserver;
-use webserver::server::rocket_main;
-
+use grpc::server::start_grpc_server;
+use webserver::server::start_web_server;
 use std::thread;
-use grpc::grpc_server::grpc_server;
 
 fn main(){
 
+    /*
+     * Not sure if this would be the correct way to do this, I need to do some more reading.
+     * Currently to get the gRPC server running along with the rocket webserver I have to spawn one
+     * in a different thread.
+     */
     thread::spawn(|| {
-        grpc_server().expect("gRPC server panic");
+        start_grpc_server().expect("gRPC server panic");
     });
 
-    rocket_main().expect("Webserver panic");
+    start_web_server().expect("Webserver panic");
 
 }
