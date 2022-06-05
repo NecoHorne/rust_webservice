@@ -16,9 +16,9 @@ use grpc::grpc_server::grpc_server;
 fn main(){
 
     thread::spawn(|| {
-        grpc_server().expect("");
+        grpc_server().expect("gRPC server panic");
     });
 
-    rocket_main();
+    rocket_main().expect("Webserver panic");
 
 }
