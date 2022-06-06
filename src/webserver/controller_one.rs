@@ -7,7 +7,8 @@ use crate::database::models::schema::posts::dsl::*;
 #[get("/")]
 pub fn index() -> Template {
     Template::render("index", context! {
-        title: "Title page",
+        title: "Template testing page",
+        h1: "This is a heading"
     })
 }
 

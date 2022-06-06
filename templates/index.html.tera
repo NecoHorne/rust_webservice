@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <script src="static/js/index.js"></script>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
 </head>
 <body>
 
-<h1>This is a title</h1>
+<h1>{{ h1 }}</h1>
 
 <div>
     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.</p>
