@@ -4,6 +4,9 @@ pub mod auth {
 }
 use auth::authentication_service_server::{AuthenticationService as Authentication};
 
+use crate::redis::redis_utils::*;
+use crate::security::jwt_utils::{new_refresh_token, new_token, verify_refresh_token, verify_token};
+
 #[derive(Debug, Default)]
 pub struct AuthenticationService {}
 

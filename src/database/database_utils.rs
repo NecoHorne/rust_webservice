@@ -7,8 +7,6 @@ use crate::database::models::schema::posts;
 
 pub fn establish_connection() -> MysqlConnection {
 
-    dotenv().ok(); //Load the env file
-
     let database_url = env::var("DATABASE_URL")
         .expect("DATABASE_URL must be set");
 
