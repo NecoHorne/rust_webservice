@@ -1,2 +1,2 @@
 pub mod controller_one;
-pub mod controller_two;
+pub mod rest_controller;

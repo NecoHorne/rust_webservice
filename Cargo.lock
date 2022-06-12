@@ -2441,6 +2441,7 @@ dependencies = [
  "prost",
  "prost-types",
  "redis",
+ "regex",
  "reqwest",
  "rocket",
  "rocket_dyn_templates",

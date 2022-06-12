@@ -3,17 +3,17 @@ use crate::database::models::schema::posts::dsl::*;
 use crate::database::database_utils::establish_connection;
 use crate::database::models::posts::Post;
 
-#[get("/two")]
+#[get("/")]
 pub fn index_two() -> &'static str {
-    "Hello World"
+    "Hello API"
 }
 
-#[get("/two/hello/<name>")]
+#[get("/hello/<name>")]
 pub fn hello_two(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 
-#[get("/two/test")]
+#[get("/test")]
 pub fn test_two() -> String {
 
     let connection = establish_connection();
@@ -26,7 +26,6 @@ pub fn test_two() -> String {
     println!("Displaying {} posts", results.len());
 
     let mut response_string: String =  String::from("");
-
 
     for post in results {
         response_string.push_str("----------\n");

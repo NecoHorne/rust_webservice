@@ -31,7 +31,6 @@ pub fn test() -> String {
 
     let mut response_string: String =  String::from("");
 
-
     for post in results {
         response_string.push_str("----------\n");
         response_string.push_str(&post.title);

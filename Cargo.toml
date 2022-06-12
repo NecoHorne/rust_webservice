@@ -40,5 +40,7 @@ chrono = "0.4.19"
 lettre = "0.10.0-rc.7"
 lettre_email = "0.9.4"
 
+regex = "1.5.6"
+
 [build-dependencies]
 tonic-build = "0.7.2" #build protobuffs during compilation

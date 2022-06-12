@@ -1,11 +1,8 @@
 use tonic::{Request, Response, Status};
-pub mod auth {
-    tonic::include_proto!("auth");
-}
 use auth::authentication_service_server::{AuthenticationService as Authentication};
+use crate::grpc::auth;
 
-use crate::redis::redis_utils::*;
-use crate::security::jwt_utils::{new_refresh_token, new_token, verify_refresh_token, verify_token};
+use crate::security::jwt_utils::{token_regex};
 
 #[derive(Debug, Default)]
 pub struct AuthenticationService {}
@@ -24,7 +21,7 @@ impl Authentication for AuthenticationService {
         //todo process actual request data
 
         let reply = auth::AuthenticateUserResponse {
-            success: true,
+            success: false,
             token: "1234".to_owned(),
             refresh_token: "1234".to_owned(),
             response_message: "This is a response message".to_owned(),
@@ -49,7 +46,7 @@ impl Authentication for AuthenticationService {
         //todo process actual request data
 
         let reply = auth::AuthenticateServiceResponse{
-            success: true,
+            success: false,
             token: "1234".to_owned(),
             response_message: "This is a response message".to_owned()
         };
@@ -148,15 +145,27 @@ impl Authentication for AuthenticationService {
     /**
      * Invalidate a users refresh token (used on logouts)
      */
-    async fn invalidate_refresh_token(&self , request: Request<auth::InvalidateRefreshTokenRequest>) -> Result<Response<auth::InvalidateRefreshTokenResponse>, Status>
+    async fn invalidate_refresh_token(&self, request: Request<auth::InvalidateRefreshTokenRequest>) -> Result<Response<auth::InvalidateRefreshTokenResponse>, Status>
     {
         println!("Request: {:?}", request);
         let req = request.into_inner();
         //todo process actual request data
 
-        let reply = auth::InvalidateRefreshTokenResponse{
-            success: true
-        };
+        let reply;
+        if token_regex(&req.refresh_token) {
+            //TODO validate user data from token
+
+            reply = auth::InvalidateRefreshTokenResponse{
+                success: true,
+                response_message: "Testing".to_owned()
+            };
+        }else {
+            reply = auth::InvalidateRefreshTokenResponse{
+                success: false,
+                response_message: "Not a valid JWT".to_owned()
+            };
+        }
+
         Ok(Response::new(reply))
     }
 

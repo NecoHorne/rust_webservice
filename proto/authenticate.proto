@@ -47,6 +47,7 @@ message InvalidateRefreshTokenRequest{
 }
 message InvalidateRefreshTokenResponse{
   bool success = 1;
+  string response_message = 2;
 }
 
 message RefreshTokenRequest{

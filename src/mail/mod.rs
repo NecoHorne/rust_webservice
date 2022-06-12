@@ -1,1 +1,1 @@
-mod mail_utils;
+pub mod mail_utils;
