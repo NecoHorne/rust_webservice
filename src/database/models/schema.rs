@@ -1,4 +1,13 @@
 table! {
+    password_reset_token (id) {
+        id -> Bigint,
+        expiryDate -> Nullable<Datetime>,
+        token -> Nullable<Varchar>,
+        user_id -> Unsigned<Integer>,
+    }
+}
+
+table! {
     posts (id) {
         id -> Integer,
         title -> Varchar,
@@ -32,7 +41,21 @@ table! {
     }
 }
 
+table! {
+    verification_token (id) {
+        id -> Bigint,
+        expiryDate -> Nullable<Datetime>,
+        token -> Nullable<Varchar>,
+        user_id -> Unsigned<Integer>,
+    }
+}
+
+joinable!(password_reset_token -> users (user_id));
+joinable!(verification_token -> users (user_id));
+
 allow_tables_to_appear_in_same_query!(
+    password_reset_token,
     posts,
     users,
+    verification_token,
 );

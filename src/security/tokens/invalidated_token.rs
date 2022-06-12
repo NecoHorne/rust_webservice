@@ -140,7 +140,7 @@ pub fn get_token(key: &String) -> Option<InvalidatedToken>{
 
 pub fn get_all_tokens() -> Result<Vec<InvalidatedToken>, RedisError> {
     let mut con= create_redis_connection().map_err(|e| e)?;
-    let keys = redis::cmd("keys").arg("invalidated_token:*").query::<Vec<String>>(&mut con).unwrap();
+    let keys = redis::cmd("keys").arg("invalidated_token:*").query::<Vec<String>>(&mut con)?;
     let mut invalidated_tokes :Vec<InvalidatedToken> = Vec::new();
     for key in keys.iter(){
         match get_token(key) {
